@@ -32,7 +32,10 @@
     
     <section>
         <div id="liste-messages">
+            <p><em>Vous entrez dans le salon.</em></p>
             <?php
+            
+            /*
                 $listeMessages = $bdd->readListeMessages($salon->getIdSalon()) ;
                 foreach($listeMessages as $message) {
                     $pseudo = $bdd->readPseudoMembre($message->getIdAuteur()) ;
@@ -41,7 +44,7 @@
                     }
                     echo '<blockquote><cite class="alias" title="'.$pseudo.', à '.$message->getDatePost().'">'.$message->getAliass().'</cite><p>'.$message->getMessage().'</p></blockquote><hr/>' ;
                 }
-                
+                */
             ?>
         </div>
         <aside>

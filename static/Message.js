@@ -14,18 +14,15 @@ class Message {
         let auteur = document.createElement("cite") ;
         auteur.className = "alias" ;
         auteur.title = this.auteur + ", le " + this.date_post ;
+        auteur.textContent = this.alias ;
         
         let paragraphe = document.createElement("p") ;
         paragraphe.textContent = this.message ;
         
-        
-        
-        
-        
-        /*
-        '<blockquote><cite class="alias" title="'.$pseudo.', à '.$message->getDatePost().'">'.$message->getAliass().'</cite><p>'.$message->getMessage().'</p></blockquote>' ;
-        */
-        return $element ;
+        blockquote.appendChild(auteur);
+        blockquote.appendChild(paragraphe);
+
+        return blockquote ;
     }
   
 }

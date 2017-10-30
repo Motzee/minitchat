@@ -1,5 +1,4 @@
-/*
-*/
+/*  POSTAGE D'UN NOUVEAU MESSAGE  */
 
 let btnPosterMsg = document.getElementById('btnPosterMsg');
 
@@ -25,8 +24,31 @@ btnPosterMsg.addEventListener('click', function(e) {
         url: 'addMessage.php',
         args: "message="+newJSONmsg,
         callback: function(response) {
-            console.log(response) ;
+            requeteAjaxRecupMessages() ;
         }
     });
 }) ;
 
+/*  RECUPERATION DES MESSAGES  */
+
+//je demande à recupMessages.php et j'obtiens un tableau 
+
+
+function requeteAjaxRecupMessages() {
+    ajaxMultisurfaces({
+        method: 'POST',
+        url: 'recupMessages.php',
+        args: "salon=1",
+        callback: function(response) {
+            let listeMessages = document.getElementById('liste-messages') ;
+            let tableauMsg = JSON.parse(response) ;
+            for(let msg of tableauMsg) {
+                let citation = new Message(msg.id, msg.auteur, msg.alias, msg.date_post, msg.message) ;
+                console.log(citation) ;
+                let newMsg = citation.afficheMessage() ;
+                listeMessages.appendChild(newMsg);
+                listeMessages.appendChild(document.createElement("hr"));
+            }
+        }
+    });
+}

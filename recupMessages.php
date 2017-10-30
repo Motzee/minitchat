@@ -13,10 +13,10 @@ require_once('classes/Database.php') ;
 
     $tableauMsg = $bdd->readNewMsg($salon, $lastId) ;
       
-    $tableauMsgJSON = json_encode($tableauMsg, JSON_PRETTY_PRINT);
+    $tableauMsgJSON = json_encode($tableauMsg);
 
-    echo '<pre>' ;
-    var_dump($tableauMsgJSON)  ;
-    echo '<pre>' ;
+    header('Content-type: application/json');
+    echo $tableauMsgJSON  ;
+    
     //et je rectifie le dernier lastIdMsg
-    $_SESSION['lastMsgId'] = 2 ;
+    //$_SESSION['lastMsgId'] = 2 ;
