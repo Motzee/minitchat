@@ -1,0 +1,233 @@
+* {
+    box-sizing : border-box ;
+}
+
+*[required]::after {
+    content : " *" ;
+    color : hsl(0, 63%, 57%) ;
+    font-weight : bold ;
+}    
+
+body {
+    margin : 0 ;
+    color : hsl(137, 20%, 38%) ;
+    font-family : sans-serif ;
+    background : linear-gradient(to bottom, white, white 80%, orange) ;
+    min-height : 100vh ;
+}
+
+h1 {
+    text-align : center ;
+    padding : 0.25rem 0 0.5rem 0 ;
+}
+    
+h1, h2, blockquote {margin : 0 ;}
+    
+    
+/*Index avec formulaire de tchat */
+#infosAcces {
+    width : 80% ;
+    min-width : 320px ;
+    text-align : center ;
+    margin : auto ;
+    margin-top : 2rem ;
+}
+
+
+#accesTchat {
+    background : hsl(48, 72%, 68%) ;
+    width : 80% ;
+    min-width : 300px ;
+    max-width : 500px ;
+    border : 3px solid hsl(137, 20%, 38%) ;
+    margin : auto ;
+    margin-top : 2rem ;
+    padding : 10px ;
+    text-align : center ;
+    border-radius : 20px;
+    box-shadow : 2px 2px 2px grey ;
+}
+
+#accesTchat input,  #accesTchat select {
+    width : 80% ;
+    min-width : 10rem ;
+    max-width : 20rem ;
+    text-align : center;
+}
+
+.btnValid {
+    background : hsl(0, 63%, 57%) ;
+    color : white ;
+    font-weight : bold ;
+    padding : 5px ;
+    border-radius : 10px ;
+}
+
+/*Tchat*/
+    
+    main#tchat {
+        display : flex ;
+        flex-direction : column ;
+        flex-wrap : wrap ;
+        border : 3px solid hsl(137, 20%, 38%) ;
+        width : 90% ;
+        min-width : 320px ;
+        max-width : 1000px ;
+        min-height : 80vh ;
+        margin : auto ;
+        border-radius : 20px ;
+        box-shadow : 2px 2px 2px grey ;
+    }
+    
+    #tchat  > header, #form-user, #liste-messages, #tchat aside {
+        padding : 10px ;
+    }
+    
+    #tchat > header {
+        background : hsl(93, 55%, 64%) ;
+        border-radius : 18px 18px 0 0 ;
+        display : flex ;
+        justify-content : space-between ;
+        align-items : center ;
+    }
+    #tchat section {
+        flex-grow : 1 ;
+        display : flex ;
+        flex-direction : column ;
+    }
+    #form-user {
+        background : hsl(48, 72%, 68%) ;
+        
+    }
+    
+    #liste-messages {
+        flex-grow : 1 ;
+        background : white ;
+    }
+    
+    #tchat aside {
+        background : hsl(31, 72%, 61%) ;
+        border-radius : 0 0 18px 18px ;
+    }
+    
+    #tchat select {
+        background : white ;
+        padding : 5px ;
+        border-radius : 5px ;
+    }
+    
+    #tchat blockquote > p {
+        margin : 0 ;
+        flex-grow : 1 ;
+    }
+    
+    #tchat hr {
+        width : 60% ;
+        color : hsl(137, 20%, 38%) ;
+        border : 1px dotted lightgrey ;
+            
+    }
+
+    .icon {
+        width : 40px ;
+    }
+    
+    #btnListeUsers {
+            display : none ;
+        }
+        
+    footer {display : none ;}   
+    
+    #form-user label {display : none ;}
+    
+    #form-user {
+            display : flex ;
+            flex-wrap : wrap ;
+            justify-content : flex-end ;
+            align-items : center ;
+        }
+        
+        #chmpMessage {
+            flex-grow : 1 ;
+            display : flex ;
+            align-items : center ;
+        }
+        
+        #userMessage {
+            flex-grow : 1 ;
+        }
+        
+        #userAlias {
+            width : 10rem ;
+        }
+        
+    @media screen and (max-width: 480px) {
+        body {
+            background : linear-gradient(to bottom, white, white 80%, yellow) ;
+        }
+        
+        #accesSalon {
+            display : none ;
+        }
+        #tchat aside {
+            display : none ;
+        }
+        #liste-messages {
+            border-radius : 0 0 18px 18px ;
+        }
+        
+        #btnListeUsers {
+            display : initial ;
+            background : transparent ;
+            border : none ;
+        }
+        
+        #chmpAlias {
+            display : none ;
+        }
+        #chmpMessage > label {
+            display : initial ;
+            margin-right : 0.1rem ;
+        }
+        
+    }
+    
+    @media screen and (min-width: 835px) {
+        body {
+            background : linear-gradient(to bottom, white, white 80%, purple) ;
+        }
+        
+        #tchat section {
+            display : flex ;
+            flex-direction : row-reverse ;
+        }
+        #liste-messages {
+            border-radius : 0 0 18px 0 ;
+        }
+        #tchat aside {
+            border-radius : 0 0 0 18px ;
+        }
+        
+        #tchat blockquote {
+            display : flex ;
+        }
+        
+        #tchat cite {
+            min-width : 7.5rem ;
+        }
+        
+        #form-user label {
+            display : initial ;
+        }
+        
+        #userAlias {
+            margin-right : 1rem ;
+        }
+        
+        #userMessage {
+            flex-grow : 1 ;
+            margin : 0 0.1rem 0 0.1rem ;
+        }
+        
+        
+    }
