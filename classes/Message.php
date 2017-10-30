@@ -1,6 +1,6 @@
 <?php
 
-class Message {
+class Message implements JsonSerializable {
     
     protected $id_message ;
     protected $id_auteur ;
@@ -18,7 +18,18 @@ class Message {
         $this->id_salon = $id_salon;
     }
 
-    
+    public function jsonSerialize() {
+        
+        $bdd = new Database() ;
+        
+	return [
+            'id' => $this->id_message,
+            'auteur' => $bdd->readPseudoMembre($this->id_auteur),
+            'alias' => $this->aliass,
+            'date_post' => $this->date_post,
+            'message' => $this->message
+	] ;
+    }
 //SETTERS
 
     function setIdMessage(int $id_message) {

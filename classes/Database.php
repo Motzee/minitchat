@@ -117,6 +117,24 @@ class Database {
         
     }
     
+    //READ new
+        public function readNewMsg(int $idSalon, int $lastIdMsg) {
+            $listeMessages = [] ;
+            
+            $reponse = $this->bddMinitchat->prepare('SELECT id_message FROM messages WHERE id_salon = :idSalon AND id_message > :lastIdMsg');
+            $reponse->bindValue('idSalon', $idSalon);
+            $reponse->bindValue('lastIdMsg', $lastIdMsg);
+            $reponse->execute();
+            
+            while ($donnees = $reponse->fetch()) {
+                $listeMessages[] = $this->readMessage($donnees['id_message']) ;
+            }
+            
+            $reponse->closeCursor();
+        
+            return $listeMessages ;
+        }
+    
     //CREATE
     public function createMessage(Message $message) {
         $req = $this->bddMinitchat->prepare('INSERT INTO messages(id_auteur, aliass, date_post, message, id_salon) VALUES(:id_auteur, :aliass, :date_post, :message, :id_salon)');
