@@ -33,6 +33,8 @@
         header('Location:index.php') ;
     }
     
+    $_SESSION['lastMsgId'] = $bdd->getLastMsgId($POST['salon']) ;
+    
     $salon = $bdd->readSalon($POST['salon']) ;
 
     include_once("templates/v_tchat.php") ;

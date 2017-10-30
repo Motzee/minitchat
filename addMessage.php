@@ -18,6 +18,14 @@ if(isset($_POST['message'])) {
 
     $bdd->createMessage($message) ;
     
+    $_SESSION['lastMsgId'] = $bdd->getLastMsgId($newMessage['idSalon']) - 1 ;
+    
+    /*$monMessage = [
+        "" =>
+    ]
+    
+    return $monMessage ;*/
+    
 } else {
     http_response_code(400);
     return 'mauvaise requête, veuillez envoyer du JSON dans une variable $_POST[\'message\'] ' ;

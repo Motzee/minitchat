@@ -20,6 +20,15 @@ class Database {
 
 /* SALONS */
     //READ one
+    public function getLastMsgId(int $idSalon):int {
+        $reponse = $this->bddMinitchat->prepare('SELECT MAX(id_message) AS last_id FROM messages WHERE id_salon = ?');
+        $reponse->execute(array($idSalon));
+        
+        $data = $reponse->fetch() ;
+        
+        return $data['last_id'] ;
+    }
+    
     public function readSalon(int $id):Salon {
         $reponse = $this->bddMinitchat->prepare('SELECT * FROM salons WHERE id_salon = ? ');
         $reponse->execute(array($id));

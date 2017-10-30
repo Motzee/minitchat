@@ -4,7 +4,7 @@
         <h2>#<?php echo $salon->getNomSalon() ;?> <button id="btnListeUsers" type="button"><img class="icon" src="static/img/users.svg" alt="icone liste utilisateurs"/></button></h2>  
         
         <form id="accesSalon" method="POST" action="tchat.php">
-            <select name="salon" id="salon">
+            <select name="salon" id="menuSalon">
                 <?php
                     $listingSalons = $bdd->readListeSalons() ;
                     foreach($listingSalons as $objet) {
@@ -33,19 +33,6 @@
     <section>
         <div id="liste-messages">
             <p><em>Vous entrez dans le salon.</em></p>
-            <?php
-            
-            /*
-                $listeMessages = $bdd->readListeMessages($salon->getIdSalon()) ;
-                foreach($listeMessages as $message) {
-                    $pseudo = $bdd->readPseudoMembre($message->getIdAuteur()) ;
-                    if($message->getAliass() == NULL) {
-                        $message->setAliass($pseudo) ;
-                    }
-                    echo '<blockquote><cite class="alias" title="'.$pseudo.', à '.$message->getDatePost().'">'.$message->getAliass().'</cite><p>'.$message->getMessage().'</p></blockquote><hr/>' ;
-                }
-                */
-            ?>
         </div>
         <aside>
             <h3>Membres connectés</h3>
