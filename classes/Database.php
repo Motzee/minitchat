@@ -63,8 +63,8 @@ class Database {
         $reponse = $this->bddMinitchat->prepare('SELECT pseudo FROM membres WHERE id_membre = ? ');
         $reponse->execute(array($id));
         
-        $pseudo = $reponse->fetch() ;
-                
+        $data = $reponse->fetch() ;
+        $pseudo = $data['pseudo'] ;   
         $reponse->closeCursor();
         
         return $pseudo ;
@@ -87,12 +87,12 @@ class Database {
         //ETUDE : voir si pas simplifiable
         $id_auteur = $donnees['id_auteur'] ;
         $msg = $donnees['message'] ;
-        $alias = $donnees['alias'] ;
+        $aliass = $donnees['aliass'] ;
         $id_salon = $donnees['id_salon'] ;
         $id_message = $donnees['id_message'] ;
         $date_post = $donnees['date_post'] ;
-              
-        $message = new Message($id_auteur, $msg, $alias, $id_salon, $id_message, $date_post) ;
+        
+        $message = new Message($id_auteur, $msg, $aliass, $id_salon, $id_message, $date_post) ;
         $reponse->closeCursor();
         
         return $message ;
@@ -127,7 +127,7 @@ class Database {
         
         while ($donnees = $reponse->fetch()) {
             $id = $donnees['id_membre'] ;
-            $listeConnectes[] = readPseudoMembre($id) ;
+            $listeConnectes[] = $this->readPseudoMembre($id) ;
         }
         
         return $listeConnectes ;
