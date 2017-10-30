@@ -9,7 +9,7 @@ class Message {
     protected $message ;
     protected $id_salon ;
     
-    function __construct(int $id_auteur, string $message, string $aliass, int $id_salon, int $id_message, $date_post) {
+    function __construct(int $id_auteur, string $message, string $aliass, int $id_salon, $id_message = null, $date_post = null) {
         $this->id_message = $id_message;
         $this->id_auteur = $id_auteur;
         $this->aliass = $aliass;

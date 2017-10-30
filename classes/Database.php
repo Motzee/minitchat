@@ -92,6 +92,7 @@ class Database {
         $id_message = $donnees['id_message'] ;
         $date_post = $donnees['date_post'] ;
         
+        //(int $id_auteur, string $message, string $aliass, int $id_salon, $id_message = null, $date_post = null) 
         $message = new Message($id_auteur, $msg, $aliass, $id_salon, $id_message, $date_post) ;
         $reponse->closeCursor();
         
@@ -116,7 +117,30 @@ class Database {
         
     }
     
-    
+    //CREATE
+    public function createMessage(Message $message) {
+        $req = $this->bddMinitchat->prepare('INSERT INTO messages(id_auteur, aliass, date_post, message, id_salon) VALUES(:id_auteur, :aliass, :date_post, :message, :id_salon)');
+        
+        $date_post = date("y-m-d H:i:s");
+        
+        $req->bindValue('id_auteur', $message->getIdAuteur());
+        $req->bindValue('aliass', $message->getAliass());
+        $req->bindValue('date_post', $date_post);
+        $req->bindValue('message', $message->getMessage());
+        $req->bindValue('id_salon', $message->getIdSalon());
+        
+        $req->execute();
+        
+        //rajouter l'id ainsi créé à l'objet $user
+        $nbId = $this->bddMinitchat->lastInsertId();
+        $message->setIdMessage($nbId) ;
+        $message->setDatePost($date_post) ;
+
+        $req->closeCursor();
+        
+        return $message ;  
+    }
+
 
 /* CONNECTES */    
     public function readListeConnectes(int $idSalon):array {

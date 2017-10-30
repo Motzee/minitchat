@@ -15,6 +15,9 @@
     if(isset($_POST)) {
         $POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         //si réception que de pseudo et salon : check pseudo non-réservé et connexion
+        if(!isset($_SESSION['id'])) {
+            $_SESSION['id'] = 4 ;
+        }
         
         //a a aussi transmis un mdp on check : si pseudo existe dans bdd on va tenter mdp, sinon inscription
         
