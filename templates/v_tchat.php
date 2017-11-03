@@ -15,10 +15,7 @@
             <!--<input id="btnTchat" type="button" value="+" />-->
         </form>
     </header>
-    
-    <style>
-        
-    </style>
+
     
     <form id="form-user">
         <span id="chmpAlias"><label for="userAlias">Alias :</label>
@@ -36,7 +33,7 @@
         </div>
         <aside>
             <h3>Membres connectés</h3>
-            <ul>
+            <ul id="listingEnLigne">
             <?php
                 $listePseudos = $bdd->readListeConnectes($salon->getIdSalon()) ;
                 foreach($listePseudos as $pseudo) {

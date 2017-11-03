@@ -67,6 +67,19 @@ class Database {
     }
 
 /* MEMBRES */
+    //iSSET
+    public function issetPseudo(string $pseudo) {
+        $reponse = $this->bddMinitchat->prepare('SELECT pseudo FROM membres WHERE LOWER(pseudo) = LOWER(:pseudo)');
+        $reponse->bindValue('pseudo', $pseudo);
+        $reponse->execute();
+        
+        $res = $reponse->fetchAll();
+
+        $reponse->closeCursor();
+        
+        return count($res) == 0 ? false : true ;
+    }
+
     //READ one
     public function readPseudoMembre(int $id):string {
         $reponse = $this->bddMinitchat->prepare('SELECT pseudo FROM membres WHERE id_membre = ? ');

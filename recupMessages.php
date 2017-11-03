@@ -4,7 +4,7 @@ session_start();
 require_once('classes/Message.php') ;
 require_once('classes/Database.php') ;
 
-    $salon = 1 ;
+    $salon = $_POST['salon'] ;
     $lastId = $_SESSION['lastMsgId'] ;
     
     //recup tous les messages du salon $id avec id supérieur à $_SESSION

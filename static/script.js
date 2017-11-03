@@ -8,7 +8,7 @@ window.addEventListener('load', function() {
     changeSalon() ;
     
     //eventlistener sur l'envoi de nouveaux messages
-    posterMessage() ;
+    requeteAjaxPosterMessage() ;
     
 });
 
@@ -19,6 +19,7 @@ window.addEventListener('load', function() {
 //Rafraichissement de la liste des messages
 function raffraichissement() {
     setInterval(requeteAjaxRecupMessages, 2000);
+    setInterval(requeteAjaxquiEstConnecte, 4000) ;
 }
 
 
@@ -38,6 +39,7 @@ function requeteAjaxRecupMessages() {
                 let newMsg = citation.afficheMessage() ;
                 listeMessages.appendChild(newMsg);
                 listeMessages.appendChild(document.createElement("hr"));
+                autoScrollToBottom(listeMessages) ;
             }
         }
     });
@@ -45,7 +47,7 @@ function requeteAjaxRecupMessages() {
 }
 
 //ajout de nouveau message dans la BDD via envoi AJAX
-function posterMessage() {
+function requeteAjaxPosterMessage() {
     let btnPosterMsg = document.getElementById('btnPosterMsg');
 
     btnPosterMsg.addEventListener('click', function(e) {
@@ -58,7 +60,7 @@ function posterMessage() {
         let newMsg= {
             "alias" : alias, 
             "msg" : msg,
-            "idSalon" : "1" 
+            "idSalon" : idSalon 
         };
 
         newJSONmsg = JSON.stringify(newMsg) ;
@@ -72,13 +74,7 @@ function posterMessage() {
             callback: function(response) {
                 //rafraichissement de liste des messages
                 requeteAjaxRecupMessages() ;
-                /*
-                //affichage de notre message
-                let listeMessages = document.getElementById('liste-messages') ;
-        
-                let myMsg = new Message(msg.id, msg.auteur, alias, msg.date_post, msg) ;
-                listeMessages.appendChild(myMsg.afficheMessage());
-                listeMessages.appendChild(document.createElement("hr"));*/
+                document.getElementById('userMessage').value = "" ;
             }
         });
     }) ;
@@ -92,6 +88,43 @@ function changeSalon() {
     menuSalons.addEventListener('change', function() {
         //redirection mais voir comment transférer le pseudo et le numéro de salon
         //document.location.href="nouvellepage.html"
-        console.log("Pouis, je change !") ;
+        console.log("Pouic, je change !") ;
     }) ;
+}
+
+
+//descente automatique du salon de discussion
+
+
+function autoScrollToBottom(listeMessages) {
+    listeMessages.scrollIntoView(false);
+}
+
+
+//actualisation de la liste des personnes conenctées
+
+function requeteAjaxquiEstConnecte() {
+
+    let idSalon = document.getElementById('idSalon').value ;
+    
+    ajaxMultisurfaces({
+        method: 'POST',
+        url: 'recupConnectes.php',
+        args: "salon="+idSalon,
+        callback: function(response) {
+            //j'ai récupéré la réponse, je vide la zone et je refais la liste
+            let listingEnLigne = document.getElementById('listingEnLigne') ;
+            
+            listingEnLigne.textContent = "" ;
+            
+            let tableauOnline =  JSON.parse(response) ;
+            
+            for(let personne of tableauOnline) {
+                let elementListe = document.createElement("li") ;
+                elementListe.textContent = personne ;
+                listingEnLigne.appendChild(elementListe);
+                console.log('bouh !') ;
+            }
+        }
+    });
 }
